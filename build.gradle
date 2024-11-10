@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'application'
+    id 'maven-publish'
+    id 'signing'
 }
 
 group 'CPEN 221'
@@ -9,6 +11,21 @@ version 'STUDENT_PREVIEW'
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
+
+signing {
+    // Remove or comment out the signing configuration
 }
 
 application {
@@ -26,4 +43,9 @@ dependencies {
     implementation 'org.jetbrains:annotations:24.0.0'
     implementation 'org.slf4j:slf4j-simple:2.0.16'
     implementation 'org.sqids:sqids:0.1.0'
+    implementation 'io.github.fastily:jwiki:1.11.0'
+}
+
+test {
+    useJUnitPlatform()
 }
